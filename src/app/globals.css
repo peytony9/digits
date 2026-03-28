@@ -1,6 +1,6 @@
 :root {
-  --nat-navbar-bg: darkblue;
-  --nat-navbar-bg-color: darkblue;
+  --nat-navbar-bg: blue;
+  --nat-navbar-bg-color: blue;
   --nat-navbar-text-highlight: khaki;
   --nat-navbar-hightlight-text: var(--bs-gray-500);
   --nat-navbar-highlight-bg: lightblue;
