@@ -1,8 +1,14 @@
+import 'dotenv/config';
 import { PrismaClient, Role, Condition } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
 import { hash } from 'bcrypt';
-import * as config from '../config/settings.development.json';
+import config from '../config/settings.development.json';
 
-const prisma = new PrismaClient();
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL!,
+});
+
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   console.log('Seeding the database');
@@ -37,7 +43,22 @@ async function main() {
       },
     });
   }
-}
+  config.defaultContacts.forEach(async (contact, index) => {
+    console.log(`  Adding contact: ${contact.firstName} ${contact.lastName}`);
+    await prisma.contact.upsert({
+      where: { id: index },
+      update: {},
+      create: {
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        address: contact.address,
+        image: contact.image,
+        description: contact.description,
+        owner: contact.owner,
+      },
+    });
+      },
+  );} 
 main()
   .then(() => prisma.$disconnect())
   .catch(async (e) => {

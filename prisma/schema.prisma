@@ -38,3 +38,12 @@ model Stuff {
   condition Condition @default(good)
   owner     String
 }
+
+model Contact {
+  id          Int @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  address     String
+  description String
+  owner       String
+}
