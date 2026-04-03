@@ -3,9 +3,9 @@ import { Col, Container, Row } from 'react-bootstrap';
 // import StuffItem from '@/components/StuffItem';
 import { loggedInProtectedPage } from '@/lib/page-protection';
 import { auth } from '@/lib/auth';
-import { Contact } from '@/lib/validationSchemas';
 import ContactCard from '@/components/ContactCard';
 import { prisma } from '@/lib/prisma';
+import { Contact } from '@prisma/client';
 
 /** Render a list of stuff for the logged in user. */
 const ListPage = async () => {
@@ -40,7 +40,7 @@ const ListPage = async () => {
             <Row xs={1} md={2} lg={3} className="g-4">
               {contacts.map((contact) => (
                 <Col key={contact.firstName + contact.lastName}>
-                  <ContactCard contact={contact} />
+                  <ContactCard contact={{ ...contact, id: contact.id.toString() } as Contact} />
                 </Col>
               ))}
             </Row>
