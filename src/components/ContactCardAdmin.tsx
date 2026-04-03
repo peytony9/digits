@@ -1,7 +1,7 @@
 'use client'
 
 // import { Stuff } from '@prisma/client';
-import { Contact } from '@prisma-client';
+import { Contact } from '@prisma/client';
 import { Card, Image } from 'react-bootstrap';
 
 /* Renders a single row in the List Stuff table. See list/page.tsx. */

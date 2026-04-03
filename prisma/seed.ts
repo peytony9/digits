@@ -12,10 +12,14 @@ const prisma = new PrismaClient({ adapter });
 
 async function main() {
   console.log('Seeding the database');
+
   const password = await hash('changeme', 10);
-  config.defaultAccounts.forEach(async (account) => {
-    const role = account.role as Role || Role.USER;
+
+  // ✅ Seed users (FIXED: no async forEach)
+  for (const account of config.defaultAccounts) {
+    const role = (account.role as Role) || Role.USER;
     console.log(`  Creating user: ${account.email} with role: ${role}`);
+
     await prisma.user.upsert({
       where: { email: account.email },
       update: {
@@ -27,13 +31,15 @@ async function main() {
         role,
       },
     });
-    // console.log(`  Created user: ${user.email} with role: ${user.role}`);
-  });
-  for (const data of config.defaultData) {
-    const condition = data.condition as Condition || Condition.good;
+  }
+
+  // ✅ Seed stuff (already correct, just slightly cleaned)
+  for (const [index, data] of config.defaultData.entries()) {
+    const condition = (data.condition as Condition) || Condition.good;
     console.log(`  Adding stuff: ${JSON.stringify(data)}`);
+
     await prisma.stuff.upsert({
-      where: { id: config.defaultData.indexOf(data) + 1 },
+      where: { id: index + 1 },
       update: {},
       create: {
         name: data.name,
@@ -43,10 +49,13 @@ async function main() {
       },
     });
   }
-  config.defaultContacts.forEach(async (contact, index) => {
+
+  // ✅ Seed contacts (FIXED: async + id issue)
+  for (const [index, contact] of config.defaultContacts.entries()) {
     console.log(`  Adding contact: ${contact.firstName} ${contact.lastName}`);
+
     await prisma.contact.upsert({
-      where: { id: index },
+      where: { id: index + 1 }, // IDs should start at 1
       update: {},
       create: {
         firstName: contact.firstName,
@@ -57,10 +66,15 @@ async function main() {
         owner: contact.owner,
       },
     });
-      },
-  );} 
+  }
+
+  console.log('✅ Seeding complete');
+}
+
 main()
-  .then(() => prisma.$disconnect())
+  .then(async () => {
+    await prisma.$disconnect();
+  })
   .catch(async (e) => {
     console.error(e);
     await prisma.$disconnect();

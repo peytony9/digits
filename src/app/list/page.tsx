@@ -3,7 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 // import StuffItem from '@/components/StuffItem';
 import { loggedInProtectedPage } from '@/lib/page-protection';
 import { auth } from '@/lib/auth';
-import { Contact } from '@/lib/validationSchemas';
+import { Contact } from '@prisma/client';
 import ContactCard from '@/components/ContactCard';
 import { prisma } from '@/lib/prisma';
 

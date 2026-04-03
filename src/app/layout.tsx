@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+// @ts-expect-error: side-effect import for bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
+// @ts-expect-error: side-effect import for global CSS
 import "./globals.css";
 import Footer from '@/components/Footer';
 import NavBar from '@/components/Navbar';
