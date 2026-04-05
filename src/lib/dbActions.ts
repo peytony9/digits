@@ -52,6 +52,17 @@ export async function addContact(contact: {
     });
     redirect('/list');
   }
+
+  export async function addNote(note: { note: string; owner: string; contactId: number;}) {
+  await prisma.note.create({
+    data: {
+      note: note.note,
+      owner: note.owner,
+      contactId: note.contactId,
+    }
+  });
+  redirect('/list');
+}
   /**
    * Creates a new contact in the database.
    * @param contact, an object with the following properties: firstName, lastName, address, image, description, owner.
@@ -61,7 +72,7 @@ export async function addContact(contact: {
  * Edits an existing stuff in the database.
  * @param stuff, an object with the following properties: id, name, quantity, owner, condition.
  */
-export async function editStuff(stuff: Stuff) {
+export default async function editStuff(stuff: Stuff) {
   // console.log(`editStuff data: ${JSON.stringify(stuff, null, 2)}`);
   await prisma.stuff.update({
     where: { id: stuff.id },

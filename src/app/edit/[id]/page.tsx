@@ -14,7 +14,7 @@ export default async function EditContactPage({ params }: { params: { id: string
     } | null,
   );
   const editID: number = +id;
-  const contact: contacts | null = await prisma.contact.findUnique({
+  const contact = await prisma.contact.findUnique({
     where: {
       id: editID,
     },
