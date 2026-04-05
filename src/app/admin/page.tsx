@@ -1,5 +1,6 @@
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { prisma } from '@/lib/prisma';
+import { Contact as PrismaContact } from '@prisma/client';
 import { adminProtectedPage } from '@/lib/page-protection';
 import { auth } from '@/lib/auth';
 import ContactCardAdmin from '@/components/ContactCardAdmin';

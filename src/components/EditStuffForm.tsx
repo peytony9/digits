@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Stuff } from '@prisma/client';
 import { EditStuffSchema } from '@/lib/validationSchemas';
-import { editStuff } from '@/lib/dbActions';
+import editStuff from '@/lib/dbActions';
 
 const onSubmit = async (data: Stuff) => {
   // console.log(`onSubmit data: ${JSON.stringify(data, null, 2)}`);
