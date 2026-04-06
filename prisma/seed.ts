@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { PrismaClient, Role, Condition } from '@prisma/client';
+import { PrismaClient, Role } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { hash } from 'bcrypt';
 import config from '../config/settings.development.json';
@@ -29,23 +29,6 @@ async function main() {
         email: account.email,
         password,
         role,
-      },
-    });
-  }
-
-  // ✅ Seed stuff (already correct, just slightly cleaned)
-  for (const [index, data] of config.defaultData.entries()) {
-    const condition = (data.condition as Condition) || Condition.good;
-    console.log(`  Adding stuff: ${JSON.stringify(data)}`);
-
-    await prisma.stuff.upsert({
-      where: { id: index + 1 },
-      update: {},
-      create: {
-        name: data.name,
-        quantity: data.quantity,
-        owner: data.owner,
-        condition,
       },
     });
   }

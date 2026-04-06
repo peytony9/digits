@@ -20,6 +20,20 @@ To keep this codebase simple and small, some important capabilities are intentio
 
 Examples of the these capabilities will be provided elsewhere.
 
+# My Digits Application
+
+## Screenshot
+<img src="doc/landing.png">
+
+## Installation Instructions
+
+To run this application locally, first clone the repository to your machine and navigate into the project directory. Next, install all required dependencies using npm install.
+
+Before starting the application, ensure that PostgreSQL is installed and running on your system. Create a new database for the project, then apply the database schema by running Prisma migrations. After the database is set up, seed it with initial data using the Prisma seed command.
+
+Once everything is configured, start the development server using npm run dev. The application will then be available in your browser at http://localhost:3000.
+
+
 ## Installation
 
 First, [install PostgreSQL](https://www.postgresql.org/download/). Then create a database for your application.
@@ -187,7 +201,17 @@ For more information, see the [Playwright documentation](https://playwright.dev/
 
 ## Walkthrough
 
-The following sections describe the major features of this template.
+This page consists of 3 pages: landing page, add contacts, and list contacts.
+
+It can contain 4 depending on if you're an admin where admins have an admin page.
+
+The Landing Page just describes what the page is able to do.
+
+The Add Contacts page is where you would input a name, location, email, etc. to add a contact into the List Contacts Page.
+
+The List Contacts page is there to basically show all the contacts that are in the system in which you can add notes to each contact separately.
+
+The Admin page for admins is a page that just displays the users of the page and all the contacts that have been listed.
 
 ### Directory structure
 
